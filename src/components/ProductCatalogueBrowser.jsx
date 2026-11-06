@@ -74,29 +74,29 @@ export default function ProductCatalogueBrowser({ catalogues }) {
   return (
     <>
       {/* HERO */}
-      <section className="grid-bg relative overflow-hidden bg-navy-950 pt-32 pb-14 text-white md:pt-44 md:pb-20">
+      <section className="grid-bg-light relative overflow-hidden border-b border-line bg-surface pt-32 pb-14 text-ink md:pt-44 md:pb-20">
         <div className="container-x relative grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">
           <div>
-            <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-[11px] tracking-wider text-white/45 uppercase">
-              <Link href="/" className="hover:text-white">Home</Link>
+            <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-[11px] tracking-wider text-ink/40 uppercase">
+              <Link href="/" className="hover:text-ink">Home</Link>
               <span>/</span>
-              <span className="text-white/75">Products</span>
+              <span className="text-ink/70">Products</span>
             </nav>
-            <p className="eyebrow !text-lime-400">ATC PRO · ATCOM Lighting</p>
+            <p className="eyebrow">ATC PRO · ATCOM Lighting</p>
             <h1 className="mt-5 font-display text-4xl leading-[1.1] font-semibold tracking-tight text-balance md:text-5xl xl:text-[3.4rem]">
-              Every product, straight from <span className="text-lime-400">our catalogues.</span>
+              Every product, straight from <span className="text-brand-500">our catalogues.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/65">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/60">
               Wires, power cables and LED lighting from all {catalogues.length} ATC catalogues. Open any product to see its page in the catalogue.
             </p>
             <dl className="mt-9 flex gap-10">
               <div>
-                <dt className="text-sm text-white/50">Products shown</dt>
-                <dd className="mt-1 font-display text-3xl font-semibold text-white">{total}</dd>
+                <dt className="text-sm text-ink/50">Products shown</dt>
+                <dd className="mt-1 font-display text-3xl font-semibold text-ink">{total}</dd>
               </div>
-              <div className="border-l border-white/15 pl-10">
-                <dt className="text-sm text-white/50">Catalogues</dt>
-                <dd className="mt-1 font-display text-3xl font-semibold text-white">{catalogues.length}</dd>
+              <div className="border-l border-line pl-10">
+                <dt className="text-sm text-ink/50">Catalogues</dt>
+                <dd className="mt-1 font-display text-3xl font-semibold text-ink">{catalogues.length}</dd>
               </div>
             </dl>
           </div>
@@ -108,7 +108,7 @@ export default function ProductCatalogueBrowser({ catalogues }) {
                 href={`#${c.id}`}
                 onClick={(event) => jumpTo(event, c.id)}
                 aria-label={`Jump to ${c.title}`}
-                className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-lime-400"
+                className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-line bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand-400"
               >
                 <Image src={c.coverImage} alt="" fill sizes="(min-width: 1024px) 180px, 30vw" className="object-cover" />
               </a>

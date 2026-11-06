@@ -159,7 +159,7 @@ export default function Home() {
 
           <div className="mt-12 text-center">
             <Link href="/products" className="btn-blue !px-9 !py-4 !text-base">
-              View all {products.length} products <ArrowRight className="h-4 w-4" />
+              View all products <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
