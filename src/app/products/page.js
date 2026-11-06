@@ -11,15 +11,13 @@ export const metadata = {
   description: "Browse ATC PRO wires and cables and ATCOM LED lighting from all six ATC catalogues: building wires, power and control cables, submersible cables, COB downlights, magnetic track systems and outdoor lighting.",
 };
 
-const browserCatalogues = catalogues.map(({ id, title, series, coverImage, pdfUrl }) => ({
-  id,
-  title,
-  series,
-  coverImage,
-  pdfUrl,
-  group: catalogueGroups[id],
-  products: catalogueProducts[id],
-}));
+// Order on this page: cable catalogues first, then lighting.
+const CATALOGUE_ORDER = ["atc-pro-profile", "atc-power-cables-manual", "atc-wires-cables-pricelist", "volume-iv", "project-volume-ix", "outdoor-volume-i"];
+
+const browserCatalogues = CATALOGUE_ORDER.map((catalogueId) => {
+  const { id, title, series, coverImage, pdfUrl } = catalogues.find((c) => c.id === catalogueId);
+  return { id, title, series, coverImage, pdfUrl, group: catalogueGroups[id], products: catalogueProducts[id] };
+});
 
 export default function ProductsPage() {
   return (

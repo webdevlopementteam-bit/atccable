@@ -1,5 +1,5 @@
 // Site content. Sources: the 2026 ATC Company Profile (primary), plus the legacy
-// atccable.com site, the ATC Product Manual PDF and the 01-11-2023 price list.
+// atccable.com site, the ATC Product Manual PDF and the ATC PRO price lists.
 // Edit here to update the whole site.
 
 export const company = {
@@ -404,7 +404,7 @@ export const downloads = [
   { title: "ATCOM Indoor & Commercial Project Price List (2026 Volume-IX)", meta: "Magnetic Tracks & Downlights · 3.9 MB", href: "/downloads/atcom-indoor-project-pricelist-2026.pdf" },
   { title: "ATCOM Niwa Outdoor & Landscape Price List (Volume-I)", meta: "Spikes, Bollards & In-Ground · 5.1 MB", href: "/downloads/atcom-outdoor-pricelist.pdf" },
   { title: "Product Manual & Technical Specifications", meta: "28 pages · 4.0 MB", href: "/downloads/atc-product-manual.pdf" },
-  { title: "Product & Pricing Manual (01-11-2023)", meta: "Latest price list · 0.6 MB", href: "/downloads/atc-price-list-2023.pdf" },
+  { title: "ATC PRO Price List (w.e.f. 29-09-2026)", meta: "Latest price list · 2.3 MB", href: "/downloads/atc-price-list-2026.pdf" },
   { title: "Product & Pricing Manual (21-07-2014)", meta: "Price list · 1.2 MB", href: "/downloads/atc-pricing-manual-2014.pdf" },
 ];
 
