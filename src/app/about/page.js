@@ -3,8 +3,8 @@ import Link from "next/link";
 import CountUp from "@/components/CountUp";
 import { CtaBand } from "@/components/ui";
 import {
-  ArrowRight, ArrowUpRight, Award, Bolt, Certificate, Check, Factory, Flame, Flask, Gauge, Gear, Home as HomeIcon,
-  Layers, Mail, MapPin, Phone, Shield, ShieldCheck, Thermometer, Tower,
+  ArrowRight, ArrowUpRight, Award, Bolt, Certificate, Check, Factory, Flame, Flask, Gauge, Gear, Handshake, Home as HomeIcon,
+  Layers, Mail, MapPin, Phone, Shield, ShieldCheck, Thermometer, Tower, Users,
 } from "@/components/Icons";
 import { ExhibitionsGallery, MissionVision } from "@/components/home/ProfileSections";
 import {
@@ -18,10 +18,10 @@ export const metadata = {
 };
 
 const STAT_STYLE = [
-  { icon: Factory, bg: "#e8f1fd", fg: "#0b6bcb" },
-  { icon: Factory, bg: "#e6f5e4", fg: "#3f9a2f" },
-  { icon: Certificate, bg: "#fdf2e0", fg: "#d48a12" },
-  { icon: Bolt, bg: "#ecebfc", fg: "#3b3fc7" },
+  { icon: Award, bg: "#e8f1fd", fg: "#0b6bcb" },
+  { icon: Layers, bg: "#e6f5e4", fg: "#3f9a2f" },
+  { icon: Users, bg: "#fdf2e0", fg: "#d48a12" },
+  { icon: Handshake, bg: "#ecebfc", fg: "#3b3fc7" },
 ];
 
 const PILLARS = [

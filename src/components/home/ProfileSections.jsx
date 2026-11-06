@@ -46,10 +46,10 @@ export function ProductFamilies() {
     <section className="relative overflow-hidden border-t border-line bg-white py-20 md:py-28">
       <div className="mx-auto w-full max-w-[1800px] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
-          <p className="flex items-center justify-center gap-4 text-xs font-semibold tracking-[0.3em] text-navy-800 uppercase md:text-sm">
-            <span className="h-px w-10 bg-brand-500 md:w-24" aria-hidden />
-            Our product range
-            <span className="h-px w-10 bg-brand-500 md:w-24" aria-hidden />
+          <p className="flex items-center justify-center gap-2.5 text-[11px] font-semibold tracking-[0.16em] whitespace-nowrap text-navy-800 uppercase md:gap-4 md:text-sm md:tracking-[0.3em]">
+            <span className="h-px w-6 bg-brand-500 md:w-24" aria-hidden />
+            Our brands & product range
+            <span className="h-px w-6 bg-brand-500 md:w-24" aria-hidden />
           </p>
           <h2 className="mt-4 font-display text-[1.9rem] leading-[1.1] font-extrabold tracking-tight text-navy-900 uppercase md:text-5xl xl:text-[3.4rem] xl:whitespace-nowrap">
             Engineered for every <span className="text-brand-500">connection</span>
@@ -60,7 +60,21 @@ export function ProductFamilies() {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-5 2xl:gap-6">
+        <ul className="mt-10 grid grid-cols-2 overflow-hidden rounded-3xl border border-line bg-white lg:grid-cols-4" aria-label="Our brands">
+          {brands.map((b, i) => (
+            <li
+              key={b.name}
+              className={`flex flex-col items-center justify-between gap-3 border-line p-5 text-center md:px-8 ${i % 2 ? "border-l" : ""} ${i > 1 ? "border-t lg:border-t-0" : ""} ${i === 2 ? "lg:border-l" : ""}`}
+            >
+              <div className="flex h-14 items-center justify-center">
+                <Image src={b.logo} alt={b.name} width={240} height={90} unoptimized={b.logo.endsWith(".svg")} className={`w-auto max-w-full object-contain ${b.name === "ATCOM MEGA" ? "h-14" : "h-10 md:h-12"}`} />
+              </div>
+              <p className="text-[13px] leading-snug text-ink/55">{b.tag}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 xl:gap-5 2xl:gap-6">
           {productFamilies.map((f, i) => {
             const st = FAMILY_STYLE[i];
             const Icon = st.icon;
@@ -151,32 +165,6 @@ export function AtcProSpotlight() {
           <Link href="/products/pvc-insulated-building-wires" className="btn-blue mt-10 !px-8 !py-4 !text-base">
             Explore ATC PRO wires <ArrowRight className="h-4 w-4" />
           </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* Brand family strip */
-export function BrandsStrip() {
-  return (
-    <section className="border-t border-line bg-white py-16 md:py-20">
-      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <SectionTitle center eyebrow="Our brands">
-          Trusted names, <span className="text-brand-500">one family.</span>
-        </SectionTitle>
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {brands.map((b) => (
-            <div key={b.name} className="flex flex-col items-center justify-between gap-5 rounded-3xl border border-line bg-white p-6 text-center transition-colors hover:border-brand-200 md:p-8">
-              <div className="flex h-20 items-center justify-center">
-                <Image src={b.logo} alt={b.name} width={240} height={90} unoptimized={b.logo.endsWith(".svg")} className={`w-auto max-w-full object-contain ${b.name === "ATCOM MEGA" ? "h-20" : "h-14 md:h-16"}`} />
-              </div>
-              <div>
-                <p className="font-display text-lg font-semibold text-ink">{b.name}</p>
-                <p className="text-sm text-ink/55">{b.tag}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>

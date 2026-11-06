@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 out.zip
+
+# original, uncompressed media (not shipped with the site)
+/source-assets/

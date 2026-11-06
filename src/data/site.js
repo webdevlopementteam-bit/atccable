@@ -102,10 +102,10 @@ export const nav = [
 ];
 
 export const stats = [
-  { value: "1991", label: "Manufacturing since" },
-  { value: "3", label: "Manufacturing units in Delhi" },
-  { value: "4", label: "BIS licences (ISI)" },
-  { value: "100%", label: "Spark-tested, every metre" },
+  { value: "35+", label: "Years of expertise" },
+  { value: "100+", label: "Products" },
+  { value: "120+", label: "Active clients" },
+  { value: "98%", label: "Client retention" },
 ];
 
 export const standards = [

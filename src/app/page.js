@@ -2,15 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import CableMarquee from "@/components/CableMarquee";
 import CountUp from "@/components/CountUp";
-import HeroBanner from "@/components/HeroBanner";
-import { AtcProSpotlight, BrandsStrip, ClientsMarquee, ExhibitionsGallery, MissionVision, ProductFamilies } from "@/components/home/ProfileSections";
+import HeroVideo from "@/components/HeroVideo";
+import { catalogueProducts } from "@/data/catalogueProducts";
+import { catalogues } from "@/data/catalogues";
+import { AtcProSpotlight, ClientsMarquee, ExhibitionsGallery, MissionVision, ProductFamilies } from "@/components/home/ProfileSections";
 import { CtaBand } from "@/components/ui";
 import {
   ArrowRight, Award, Bolt, Building, Certificate, Check, Download, ExternalLink, Factory, File, Flame, Flask, Gear, Handshake, Home as HomeIcon,
   Layers, Network, PdfIcon, Shield, ShieldCheck, Tower, Users,
 } from "@/components/Icons";
 import {
-  certifications, company, downloads, inspectionStages, products, standards, stats,
+  certifications, company, downloads, inspectionStages, standards, stats,
 } from "@/data/site";
 
 const reasons = [
@@ -32,10 +34,10 @@ const ABOUT_POINTS = [
 
 // Intro stats — icon + tile colour per stat (same order as `stats`)
 const STAT_STYLE = [
-  { icon: Factory, bg: "#e8f1fd", fg: "#0b6bcb", note: "Delivering ISI-marked wires & cables from Delhi." },
-  { icon: Building, bg: "#e6f5e4", fg: "#3f9a2f", note: "Relied on by dealers, builders and contractors." },
-  { icon: Certificate, bg: "#fdf2e0", fg: "#d48a12", note: "IS 694, IS 1554, IS 7098 and IS 14255." },
-  { icon: Bolt, bg: "#ecebfc", fg: "#3b3fc7", note: "High-voltage spark testing on every metre." },
+  { icon: Award, fg: "#0b6bcb" },
+  { icon: Layers, fg: "#3f9a2f" },
+  { icon: Users, fg: "#d48a12" },
+  { icon: Handshake, fg: "#3b3fc7" },
 ];
 
 // BIS licence cards — icon + colours per standard (same order as `standards`)
@@ -55,17 +57,23 @@ const STEP_COLORS = [
 ];
 const STEP_IMAGES = ["wire-conductor", "bunching", "stranding", "extrusion"].map((n) => `/images/process/${n}.webp`);
 
-// Products shown on the homepage (2 rows of 4) — image, accent colour and tagline per card
-const HOME_PRODUCTS = [
-  { slug: "pvc-insulated-building-wires", image: "building-wires", w: 390, h: 239, color: "#1f5fbf", tint: "#eaf2fd", text: "Safe, durable and reliable wiring for homes and commercial buildings." },
-  { slug: "submersible-cables", image: "submersible", w: 393, h: 239, color: "#2f8a2a", tint: "#e6f4e1", text: "High performance cables designed for pumps, submersible and industrial use." },
-  { slug: "round-flexible-wires", image: "round-flexible", w: 392, h: 239, color: "#e46a0c", tint: "#fdeedd", text: "Flexible, easy to install and ideal for domestic and light industrial use." },
-  { slug: "pvc-power-control-cables", image: "power-control", w: 409, h: 239, color: "#5b35d5", tint: "#ece7fc", text: "Engineered for safe and efficient power and control transmission." },
-  { slug: "lt-xlpe-power-cables", image: "single-core", w: 390, h: 239, color: "#d1282f", tint: "#fde5e6", text: "High conductivity and superior performance for industrial applications." },
-  { slug: "aerial-bunched-cables", image: "aerial-bunched", w: 393, h: 239, color: "#1f5fbf", tint: "#eaf2fd", text: "Rugged and reliable cables for critical infrastructure and overhead distribution." },
-  { slug: "telecom-switchboard-jumper-wires", image: "telecom", w: 392, h: 239, color: "#2f8a2a", tint: "#e6f4e1", text: "Switchboard, jumper and drop wires built to I.T.D. specifications." },
-  { slug: "panel-board-wiring", image: "multi-core", w: 409, h: 239, color: "#1f5fbf", tint: "#eaf2fd", text: "Made for modern electrical panels with superior safety." },
+// Products shown on the homepage: 3 rows of 4, two from each category.
+const HOME_CATEGORIES = [
+  { label: "Wires", color: "#1f5fbf", tint: "#eaf2fd", catalogue: "atc-wires-cables-pricelist", ids: ["round-flexible-multicore", "aluminium-cables"] },
+  { label: "Power Cables", color: "#5b35d5", tint: "#ece7fc", catalogue: "atc-wires-cables-pricelist", ids: ["copper-power", "lt-power-armoured"] },
+  { label: "Special Cables", color: "#2f8a2a", tint: "#e6f4e1", catalogue: "atc-wires-cables-pricelist", ids: ["super-flat-submersible", "coaxial-rg6"] },
+  { label: "Indoor LED", color: "#e46a0c", tint: "#fdeedd", catalogue: "volume-iv", ids: ["liquid-beam", "zx-surface"] },
+  { label: "Project Lighting", color: "#d1282f", tint: "#fde5e6", catalogue: "project-volume-ix", ids: ["magnetic-track-spot", "mbx-30mm-linear"] },
+  { label: "Outdoor Lighting", color: "#1f5fbf", tint: "#eaf2fd", catalogue: "outdoor-volume-i", ids: ["keiko", "zoomable-spot"] },
 ];
+
+const HOME_PRODUCTS = HOME_CATEGORIES.flatMap(({ catalogue, ids, ...category }) => {
+  const { pdfUrl } = catalogues.find((c) => c.id === catalogue);
+  return ids.map((id) => {
+    const product = catalogueProducts[catalogue].find((p) => p.id === id);
+    return { ...product, ...category, href: `${pdfUrl}#page=${product.pdfPage}` };
+  });
+});
 
 function Eyebrow({ children }) {
   return <p className="eyebrow">{children}</p>;
@@ -83,10 +91,10 @@ export default function Home() {
 
   return (
     <>
-      {/* BANNER — artwork carries the headline, shown uncropped */}
+      {/* HERO VIDEO */}
       <section className="bg-white pt-[72px] md:pt-[108px]">
         <h1 className="sr-only">When it&apos;s about life, trust only ATC — high quality electrical wires & cables</h1>
-        <HeroBanner />
+        <HeroVideo />
       </section>
 
       {/* STATS COUNTER */}
@@ -113,48 +121,47 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-white py-16">
         <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-5xl text-center">
             <p className="eyebrow justify-center">Product range</p>
             <h2 className="mt-4 font-display text-2xl leading-tight font-semibold tracking-tight text-ink md:text-3xl lg:text-[2.1rem] lg:whitespace-nowrap xl:text-[2.5rem]">
-              From house wire to power cable — one trusted name.
+              From house wire to LED lighting — one trusted name.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-ink/60">ISI-marked wires and cables for homes, industry and infrastructure — available in FR, FRLS and heat-resistant grades.</p>
+            <p className="mx-auto mt-4 max-w-2xl text-ink/60">ISI-marked wires and cables, plus ATCOM LED lighting — for homes, industry and infrastructure.</p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {HOME_PRODUCTS.map(({ slug, image, h, color, tint, text }) => {
-              const p = products.find((x) => x.slug === slug);
-              return (
-                <Link
-                  key={slug}
-                  href={`/products/${slug}`}
-                  className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-white shadow-[0_14px_40px_-30px_rgba(10,18,34,0.35)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(11,107,203,0.4)]"
-                >
-                  <div className="relative overflow-hidden" style={{ aspectRatio: `392 / ${h}` }}>
-                    <Image
-                      src={`/images/home-products/${image}.webp`}
-                      alt={p.name}
-                      fill
-                      sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 90vw"
-                      className="object-cover object-left transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col px-7 pt-5 pb-6">
-                    <p className="text-[13px] font-medium tracking-[0.12em] text-ink/50 uppercase">{p.category}</p>
-                    <h3 className="mt-1.5 font-display text-xl leading-snug font-semibold text-ink">{p.name}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-ink/55">{text}</p>
-                    <span className="mt-auto flex items-center gap-4 pt-5 font-semibold" style={{ color }}>
-                      View details
-                      <span className="grid h-10 w-10 place-items-center rounded-full transition-transform group-hover:translate-x-1" style={{ background: tint }}>
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
+          <div className="mt-12 grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-4">
+            {HOME_PRODUCTS.map(({ id, name, specs, image, href, label, color, tint }) => (
+              <a
+                key={id}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_14px_40px_-30px_rgba(10,18,34,0.35)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(11,107,203,0.4)] md:rounded-3xl"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-line bg-white">
+                  <Image
+                    src={image}
+                    alt={name}
+                    fill
+                    sizes="(min-width: 1024px) 320px, 50vw"
+                    className="object-contain p-3 transition-transform duration-700 group-hover:scale-105 md:p-5"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-3.5 md:px-6 md:pt-5 md:pb-6">
+                  <p className="text-[10px] font-semibold tracking-[0.12em] uppercase md:text-xs" style={{ color }}>{label}</p>
+                  <h3 className="mt-1.5 font-display text-sm leading-snug font-semibold text-ink md:text-lg">{name}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-ink/55 md:text-sm">{specs}</p>
+                  <span className="mt-auto flex items-center justify-between gap-2 pt-4 text-xs font-semibold md:pt-5 md:text-sm" style={{ color }}>
+                    View details
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full transition-transform group-hover:translate-x-1 md:h-10 md:w-10" style={{ background: tint }}>
+                      <ArrowRight className="h-4 w-4" />
                     </span>
-                  </div>
-                </Link>
-              );
-            })}
+                  </span>
+                </div>
+              </a>
+            ))}
           </div>
 
           <div className="mt-12 text-center">
@@ -221,8 +228,6 @@ export default function Home() {
       </section>
 
       <AtcProSpotlight />
-
-      <BrandsStrip />
 
       <ProductFamilies />
 
