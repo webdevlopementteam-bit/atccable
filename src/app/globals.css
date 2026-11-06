@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-poppins), ui-sans-serif, sans-serif;
+
+  /* Brand — taken from the ATC logo (blue petals + lime leaf) */
+  --color-ink: #0a1222;
+  --color-navy-950: #060d1b;
+  --color-navy-900: #0b1730;
+  --color-navy-800: #102244;
+  --color-navy-700: #17305d;
+  --color-brand-50: #eef6ff;
+  --color-brand-100: #d9ebff;
+  --color-brand-200: #b3d6ff;
+  --color-brand-400: #3f95f0;
+  --color-brand-500: #0b6bcb;
+  --color-brand-600: #0059ad;
+  --color-brand-700: #00478c;
+  --color-sky-400: #29b6f6;
+  --color-lime-300: #d4ea6b;
+  --color-lime-400: #bfd730;
+  --color-lime-500: #a6be1b;
+  --color-copper: #c77b3c;
+  --color-surface: #f6f8fb;
+  --color-line: #e3e8ef;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulse-line: pulse-line 3.2s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-line {
+    0% { stroke-dashoffset: 400; }
+    100% { stroke-dashoffset: 0; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-lime-400);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-brand-500;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-current;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 bg-lime-400 text-ink hover:bg-lime-300 hover:shadow-[0_8px_30px_-6px_rgba(191,215,48,0.6)];
+  }
+  .btn-blue {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 bg-brand-500 text-white hover:bg-brand-600 hover:shadow-[0_8px_30px_-6px_rgba(11,107,203,0.5)];
+  }
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 bg-ink text-white hover:bg-navy-700;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 border border-white/20 text-white hover:border-white/50 hover:bg-white/5;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 border border-line text-ink hover:border-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-white;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .grid-bg-light {
+    background-image:
+      linear-gradient(to right, rgba(10, 18, 34, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 18, 34, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .spec-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .spec-table th {
+    @apply border-b border-brand-100 bg-brand-50 px-4 py-3 text-left font-mono text-[11px] font-medium tracking-wider whitespace-nowrap text-brand-700 uppercase first:rounded-tl-xl last:rounded-tr-xl;
+  }
+  .spec-table td {
+    @apply border-b border-line px-4 py-3 whitespace-nowrap tabular-nums text-ink/80;
+  }
+  .spec-table td:first-child {
+    @apply font-semibold text-ink;
+  }
+  .spec-table tbody tr {
+    @apply transition-colors hover:bg-brand-50/60;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile/tablet only: never allow sideways page scrolling. Desktop is unaffected. */
+@media (max-width: 1023px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  /* Big section headings read too heavy on small screens — use semibold there. */
+  h1:is(.font-bold, .font-extrabold),
+  h2:is(.font-bold, .font-extrabold) {
+    font-weight: 600;
+  }
+}
