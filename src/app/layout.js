@@ -26,6 +26,9 @@ export const metadata = {
     type: "website",
     images: ["/images/hero-desktop.webp"],
   },
+  verification: {
+    google: "aQUepi8ZYL8khDkNTFaSsXWXspfv-LCVlrnGRiZiCuE",
+  },
 };
 
 export const viewport = {
