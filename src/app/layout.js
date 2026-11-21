@@ -38,7 +38,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={poppins.variable}>
-      <body className="flex min-h-screen flex-col">
+      <body className="flex min-h-screen flex-col" suppressHydrationWarning>
         <a href="#main" className="sr-only z-[60] rounded bg-lime-400 px-4 py-2 text-ink focus:not-sr-only focus:fixed focus:top-4 focus:left-4">
           Skip to content
         </a>
